@@ -6,12 +6,18 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "sanity::build": "sanity build",
+    "sanity::deploy": "sanity deploy"
   },
   "dependencies": {
+    "@astrojs/react": "^5.0.0",
     "@sanity/astro": "^3.2.11",
     "@sanity/client": "^7.17.0",
     "@tailwindcss/vite": "^4.1.12",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@types/react-is": "^19.2.0",
     "astro": "^5.13.5",
     "astro-portabletext": "^0.13.0",
     "dotenv": "^17.3.1",
@@ -21,5 +27,8 @@
     "sanity": "^5.14.1",
     "styled-components": "^6.3.11",
     "tailwindcss": "^4.1.12"
+  },
+  "devDependencies": {
+    "daisyui": "^5.5.19"
   }
 }
