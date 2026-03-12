@@ -8,11 +8,11 @@ import Layout from "../../layouts/Layout.astro";
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`;
 const post = await sanityClient.fetch<SanityDocument>(POST_QUERY, Astro.params);
 
-export async function getStaticPaths(): Promise<{ params: { slug: string } }> {
+export async function getStaticPaths() {
   const SLUGS_QUERY = `*[_type == "post" && defined(slug.current)]{
     "params": {"slug": slug.current}
   }`;
-  return await sanityClient.fetch(SLUGS_QUERY, Astro.params);
+  return await sanityClient.fetch(SLUGS_QUERY);
 }
 
 const { projectId, dataset } = sanityClient.config();

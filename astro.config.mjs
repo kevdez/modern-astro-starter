@@ -15,7 +15,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  output: 'server',
+  output: 'static',
 
   adapter: node({
     mode: 'standalone',
@@ -30,4 +30,8 @@ export default defineConfig({
     }),
     react(),
   ],
+
+  server: {
+    host: '0.0.0.0'
+  },
 });
