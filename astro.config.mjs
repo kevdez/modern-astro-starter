@@ -15,7 +15,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  output: 'static',
+  output: 'server',
 
   adapter: node({
     mode: 'standalone',
@@ -23,8 +23,8 @@ export default defineConfig({
 
   integrations: [
     sanity({
-      projectId: process.env.SANITY_PROJECT_ID,
-      dataset: process.env.SANITY_DATASET,
+      projectId: "t6u9lw9u",
+      dataset: "production",
       useCdn: false, // for static builds
       studioBasePath: '/admin',
     }),
