@@ -12,7 +12,7 @@ const homePage = await sanityClient.fetch(`
 `);
 ---
 
-<html lang="en" data-theme="caramellatte">
+<html lang="en" data-theme="retro">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -24,7 +24,7 @@ const homePage = await sanityClient.fetch(`
 		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
 		<script is:inline>
 			(function () {
-				const theme = localStorage.getItem('theme') || 'light';
+				const theme = localStorage.getItem('theme') || 'retro';
 				document.documentElement.setAttribute('data-theme', theme);
 			})();
 		</script>
@@ -43,19 +43,17 @@ const homePage = await sanityClient.fetch(`
 						</svg>
 					</div>
 					<ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-50 w-44 p-2 shadow-lg border border-base-200 mt-1">
-						<li><button class="theme-btn" data-theme="cupcake">☀️ Light</button></li>
+						<li><button class="theme-btn" data-theme="retro">☀️ Light</button></li>
 						<li><button class="theme-btn" data-theme="dark">🌙 Dark</button></li>
-						<!-- <li><button class="theme-btn" data-theme="cupcake">🧁 Cupcake</button></li> -->
-						<li><button class="theme-btn" data-theme="caramellatte">🍮 Caramellatte</button></li>
 						<li><button class="theme-btn" data-theme="synthwave">🌌 Synthwave</button></li>
-						<li><button class="theme-btn" data-theme="retro">🕹️ Retro</button></li>
-						<li><button class="theme-btn" data-theme="cyberpunk">🌃 Cyberpunk</button></li>
 						<li><button class="theme-btn" data-theme="coffee">☕ Coffee</button></li>
 						<li><button class="theme-btn" data-theme="dim">🌑 Dim</button></li>
-						<li><button class="theme-btn" data-theme="lofi">🎵 Lofi</button></li>
 						<li><button class="theme-btn" data-theme="valentine">💖 Valentine</button></li>
 						<li><button class="theme-btn" data-theme="halloween">🎃 Halloween</button></li>
 						<li><button class="theme-btn" data-theme="garden">🌿 Garden</button></li>
+						<li><button class="theme-btn" data-theme="black">⚫ Black</button></li>
+						<li><button class="theme-btn" data-theme="luxury">💎 Luxury</button></li>
+						<li><button class="theme-btn" data-theme="dracula">🧛‍♂️ Dracula</button></li>
 					</ul>
 				</div>
 			</div>
