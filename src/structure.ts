@@ -1,7 +1,7 @@
 import type { StructureResolver } from 'sanity/structure'
 import { HomeIcon, DocumentTextIcon, ImageIcon } from '@sanity/icons'
 
-const SINGLETONS = ['homePage']
+const SINGLETONS = ['homePage', 'blogPage']
 
 export const structure: StructureResolver = (S) =>
   S.list()
@@ -16,6 +16,17 @@ export const structure: StructureResolver = (S) =>
             .schemaType('homePage')
             .documentId('homePage')
             .title('Home Page')
+        ),
+
+      // Singleton: Blog Page
+      S.listItem()
+        .title('Blog Page')
+        .icon(DocumentTextIcon)
+        .child(
+          S.document()
+            .schemaType('blogPage')
+            .documentId('blogPage')
+            .title('Blog Page')
         ),
 
       S.divider(),

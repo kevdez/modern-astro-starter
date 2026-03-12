@@ -1,0 +1,33 @@
+---
+import type { SanityDocument } from "@sanity/client";
+import { sanityClient } from "sanity:client";
+import Layout from "../../layouts/Layout.astro";
+
+const POSTS_QUERY = `*[
+  _type == "post"
+  && defined(slug.current)
+]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt}`;
+
+const BLOG_PAGE_QUERY = `*[_type == "blogPage" && _id == "blogPage"][0]{blogTitle}`;
+
+const [posts, blogPage] = await Promise.all([
+  sanityClient.fetch<SanityDocument[]>(POSTS_QUERY),
+  sanityClient.fetch<{blogTitle: string}>(BLOG_PAGE_QUERY),
+]);
+---
+
+<Layout>
+  <main class="container mx-auto min-h-screen max-w-3xl p-8">
+    <h1 class="text-4xl font-bold mb-8 text-base-content">{blogPage?.blogTitle ?? "Blog"}</h1>
+    <ul class="flex flex-col gap-y-2">
+      {posts.map((post) => (
+          <li>
+            <a href={`/blog/${post.slug.current}`} class="group block p-4 rounded-lg hover:bg-base-200 transition">
+              <h2 class="text-xl font-semibold text-base-content group-hover:text-primary transition">{post.title}</h2>
+              <p class="text-base-content/50 text-sm mt-1">{new Date(post.publishedAt).toLocaleDateString()}</p>
+            </a>
+          </li>
+        ))}
+    </ul>
+  </main>
+</Layout>

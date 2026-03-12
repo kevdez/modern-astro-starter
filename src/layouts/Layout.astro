@@ -1,18 +1,80 @@
 ---
 import '../styles/global.css'
+import { sanityClient } from "sanity:client";
+
 
 export const prerender = true;
+
+const homePage = await sanityClient.fetch(`
+  *[_id == "homePage"][0]{
+    siteName
+  }
+`);
 ---
 
-<html lang="en">
+<html lang="en" data-theme="caramellatte">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>{homePage?.siteName ?? "mysite.com"}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+		<script is:inline>
+			(function () {
+				const theme = localStorage.getItem('theme') || 'light';
+				document.documentElement.setAttribute('data-theme', theme);
+			})();
+		</script>
 	</head>
 	<body>
-		<slot />
+		<header class="navbar fixed top-0 left-0 right-0 z-40 bg-base-100/80 backdrop-blur-[1px] border-b border-base-200">
+			<div class="navbar-start">
+				<a href="/" class="btn btn-ghost text-lg text-primary font-bold tracking-tight">{homePage?.siteName ?? "Portfolio"}</a>
+			</div>
+			<div class="navbar-end gap-2">
+				<a href="/blog" class="btn btn-ghost btn-sm hidden sm:flex">Blog</a>
+				<div class="dropdown dropdown-end">
+					<div tabindex="0" role="button" class="btn btn-ghost btn-circle" aria-label="Switch theme">
+						<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+						</svg>
+					</div>
+					<ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-50 w-44 p-2 shadow-lg border border-base-200 mt-1">
+						<li><button class="theme-btn" data-theme="cupcake">☀️ Light</button></li>
+						<li><button class="theme-btn" data-theme="dark">🌙 Dark</button></li>
+						<!-- <li><button class="theme-btn" data-theme="cupcake">🧁 Cupcake</button></li> -->
+						<li><button class="theme-btn" data-theme="caramellatte">🍮 Caramellatte</button></li>
+						<li><button class="theme-btn" data-theme="synthwave">🌌 Synthwave</button></li>
+						<li><button class="theme-btn" data-theme="retro">🕹️ Retro</button></li>
+						<li><button class="theme-btn" data-theme="cyberpunk">🌃 Cyberpunk</button></li>
+						<li><button class="theme-btn" data-theme="coffee">☕ Coffee</button></li>
+						<li><button class="theme-btn" data-theme="dim">🌑 Dim</button></li>
+						<li><button class="theme-btn" data-theme="lofi">🎵 Lofi</button></li>
+						<li><button class="theme-btn" data-theme="valentine">💖 Valentine</button></li>
+						<li><button class="theme-btn" data-theme="halloween">🎃 Halloween</button></li>
+						<li><button class="theme-btn" data-theme="garden">🌿 Garden</button></li>
+					</ul>
+				</div>
+			</div>
+		</header>
+		<div class="pt-16">
+			<slot />
+		</div>
+		<script>
+			function setTheme(theme: string) {
+				localStorage.setItem('theme', theme);
+				document.documentElement.setAttribute('data-theme', theme);
+				(document.activeElement as HTMLElement)?.blur();
+			}
+
+			document.querySelectorAll<HTMLButtonElement>('.theme-btn').forEach((btn) => {
+				btn.addEventListener('click', () => {
+					setTheme(btn.dataset.theme!);
+				});
+			});
+		</script>
 	</body>
 </html>

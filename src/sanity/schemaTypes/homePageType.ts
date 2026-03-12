@@ -8,6 +8,12 @@ export const homePageType = defineType({
   icon: HomeIcon,
   fields: [
     defineField({
+      name: 'siteName',
+      title: 'Site Name',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'heroTitle',
       title: 'Hero Title',
       type: 'string',

@@ -7,8 +7,8 @@ import { structure } from './src/structure'
 export default defineConfig({
   name: 'yeol',
   title: 'Yeol',
-  projectId: import.meta.env.SANITY_PROJECT_ID  ?? 't6u9lw9u',
-  dataset: import.meta.env.SANITY_DATASET ?? 'production',
+  projectId: 't6u9lw9u',
+  dataset: 'production',
   plugins: [structureTool({ structure })],
   schema: {
     types: schemaTypes,
